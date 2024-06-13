@@ -1,0 +1,32 @@
+---
+
+- name: installing-jenkins
+  hosts: all
+  become: true
+  tasks:
+    - name: getting URL
+      become: true
+      shell: |
+        curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/sharr
+e/keyrings/jenkins-keyring.asc > /dev/null
+        echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]  https://pkg.jenkins.io/debb
+ian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+    - name: update
+      apt:
+        update_cache: yes
+
+    - name: installing java
+      apt:
+        name: openjdk-11-jdk
+        state: present
+
+    - name: installing jenkins
+      apt:
+        name: jenkins
+        state: present
+
+    - name: start jenkins
+      service:
+        name: jenkins
+        state: started
