@@ -1,0 +1,8 @@
+ansible-vault encrypt playbook1.yaml
+ansible-vault decrypt playbook1.yaml
+cat playbook1.yaml
+ansible-vault create playbook1.yml
+ansible-vault edit playbook3.yml
+asible-playbook playbook3.yml
+ansible-vault view playbook3.yml
+ansible-vault rekey playbook2.yml
