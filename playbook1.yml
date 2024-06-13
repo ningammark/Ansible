@@ -1,0 +1,26 @@
+---
+
+- name: creating-some-task
+  hosts: all
+  become: true
+  tasks:
+    - name: creating a directory
+      file:
+        name: ansible-test
+        path: /root/
+        state: directory
+        mode: '0777'
+
+    - name: creating a file
+      file:
+        path: /root/ansible-test/file2
+        state: touch
+        mode: '0777'
+
+    - name: writing content to file2
+      copy:
+        dest: /root/ansible-test/file2
+        content: |
+                hello guys good morning
+                today is thursday
+                Welcome to ANsible class
